@@ -51,8 +51,8 @@ def f_ocorrencia(l:list,j:int)->int:
     i = 0
     n = 0
 
-    while i < len(l):
-        if j == l[i]:
+    while(i < len(l)):
+        if(j == l[i]):
             n += 1
         i += 1
 
@@ -63,7 +63,7 @@ def f_maior(l):
     maior = l[0]
 
     for x in l:
-        if (x > maior):
+        if(x > maior):
             maior = x
 
     return maior
@@ -75,8 +75,8 @@ def f_posicaoDoMaior(l):
     i = 0
     maior_pos = f_maior(l)
 
-    while i < len(l):
-        if maior_pos == l[i]:
+    while(i < len(l)):
+        if(maior_pos == l[i]):
             maior = i
         i += 1
 
@@ -97,7 +97,7 @@ def f_inverter(l):
     j = len(l) - 1
     
 
-    while (i < j):  
+    while(i < j):  
         print(i, j) #só pra saber como tá o comportamento do i e do j
         f_troca(l, i, j)
         i += 1
@@ -159,8 +159,95 @@ def f_kMultiplos():
         resultado = i * n
         l.append(resultado)
     return l
+
+'''QUESTÃO 11: Faça um procedimento que leia um número n e depois a notas de n alunos (0 ≤ n ≤ 100). Em seguida, calcule e imprima a média da turma,e o número de alunos que ficaram com nota acima de 60.'''
+def f_mediaAlunos(n,l):
+    media = float(0.0)
+    soma_notas = float(0.0)
+    notas_maiores60 = float(0.0)
+
+    soma_notas = 0
+    nota_maior60 = 0
+    if((n >= 0) and (n <= 100)):
+        for notas in range(n):
+            soma_notas += l[notas]
     
+        for i in range(n):
+            if(l[i] > 60):
+                notas_maiores60 += 1
+
+    media = soma_notas / n
+    
+    print(media)
+    print(notas_maiores60)
+        
+'''QUESTÃO 12: Faça um procedimento que leia um número n e a temperatura de n dias do ano. Em seguida, calcule a média de temperatura anual e imprima o número de dias em que a temperatura ficou abaixo da média.'''
+def f_mediaTemperaturas(n,l):
+    media = float(0.0)
+    soma_temps = float(0.0)
+    temps_maioresMedia = float(0.0)
+
+    soma_temps = 0
+    temps_maioresMedia = 0
+    for temperaturas in range(n):
+        soma_temps += l[temperaturas]
+    
+    media = soma_temps / n
+
+    for i in range(n):
+        if(l[i] > media):
+            temps_maioresMedia += 1
+                
+    print(temps_maioresMedia)
+
+'''QUESTÃO 13: Dadas duas listas l1 e l2 com a mesma quantidade de números, imprima quantos elementos aparecem exatamente na mesma posiço em ambas as listas.'''
+def f_mesmaPosicao(l1,l2):
+    ocorrencia = int()
+
+    ocorrencia = 0
+    for i in range(len(l1)):
+        if(l1[i] == l2[i]):
+            ocorrencia += 1
+    print(ocorrencia)
+
+'''QUESTÃO 14: Dado um número n, faça um procedimento que leia o nome e o salário de n funcionários de uma empresa e imprima o nome de todos os funcionários que ganham mais que a média dos demais'''
+def f_salarios(n,nome,salario):
+    nomes_maisMedia = list()
+    salario_total = float(0.0)
+    media_salarial = float(0.0)
+
+    salario_total = 0
+    for x in range(n):
+        salario_total += salario[x]
+
+    media_salarial = salario_total / n
+
+    for sujeito in range(n):
+        if(salario[sujeito] > media_salarial):
+            nomes_maisMedia.append(nome[sujeito])
+    print(media_salarial)
+    print(nomes_maisMedia)
+
+
+'''QUESTÃO 15: Dada uma lista ordenada l e dois inteiros x e y(x < y), retorne uma sublista contendo todos os elementos de l que estiverem entre x e y'''
+def f_sublista(l,x,y):
+    subL = list()
+    if(x < y):
+        for valor in l:
+            if((valor > x) and (valor < y)):
+                subL.append(valor)
+    return subL
+
+'''QUESTÃO 16: Alice e Beatriz colecionam cartas de Pokémon. As cartas são produzidas para um jogo que reproduz a batalha introduzida em um dos mais bem sucedidos jogos de videogame da história, mas Alice e Beatriz são muito pequenas para jogar, e estão interessadas apenas nas cartas propriamente ditas. Para facilitar, vamos considerar que cada carta possui um identificador único que é um número inteiro. Cada uma das duas meninas possui um conjunto de cartas e, como a maioria das garotas de sua idade, gostam de trocar entre si as cartas que têm. Elas obviamente não tem interesse em trocar cartas idênticas, que ambas possuem, e não querem receber cartas repetidas na troca. Além disso, as cartas serão trocadas em uma única operação de troca: Alice da para Beatriz um sub-conjunto com N cartas distintas e recebe de volta um outro sub-conjunto com N cartas distintas. As meninas querem saber qual e o número máximo de cartas que podem ser tro- cadas. Por exemplo, se Alice tem o conjunto de cartas [1,1,2,3,5,7,8,8,9,15] e Beatriz o conjunto [2,2,2,3,4,6,10,11,11], elas podem trocar entre si no máximo quatro cartas. Escreva uma funcao que receba como parametros a lista de cartas que Alice tem e a lista de cartas que Beatriz possui, e imprima o número máximo de cartas que podem ser trocadas. As cartas de Alice e Beatriz são apresentadas em ordem não decrescente.'''
+
+
+
+
 def main():
-    print(f_kMultiplos())
+    l = [1,2,3,4,5,6,7,8,9]
+    x = 3
+    y = 8
+    print(f_sublista(l,x,y))
+
 if __name__ == "__main__":
     main()
