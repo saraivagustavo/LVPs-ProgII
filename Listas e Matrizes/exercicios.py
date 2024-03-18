@@ -361,11 +361,24 @@ def f_determinanteMatriz(M):
             
     return determinante
 
+'''QUESTÃO 23: Defina um procedimento que receba uma matriz quadrada M como parâmetro. A função deve transformar a matriz M na sua transposta, em seguida, transformar essa matriz transposta em uma matriz triangular inferior e, por fim, imprimir a matriz resultante.'''
+def f_matrizTriangularInferior(M):
+    n = len(M)
+    for i in range(n):
+        for j in range(i+1, n):
+            M[i][j], M[j][i] = M[j][i], M[i][j]
+    for i in range(n):
+        for j in range(i+1, n):
+            M[i][j] = 0
+    for linha in M:
+        print(linha)
 
 #testes
 def main():
-    M = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]
-    print(f_matrizIdentidade(M))
+    M = [[1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]]
+    f_matrizTriangularInferior(M)
 
 if __name__ == "__main__":
     main() 
