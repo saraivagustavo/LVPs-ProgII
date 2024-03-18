@@ -297,7 +297,6 @@ def f_somaMatriz(A,B):
         resultado.append(linha)
         
     return resultado
-
 '''QUESTÃO 20: Um professor deseja calcular o média de notas de uma turma. Faça um procedimento que leia uma matriz contendo as notas dos alunos. O procedimento começa perguntando o número "m" de alunos e número n de notas, e cria uma matriz "m x n" que armazena as "n" notas de cada um dos "m" alunos (os valores de "m", "n" e das notas serão lidos do teclado). A nota final de cada aluno é a média simples das suas "n" notas. O procedimento deve imprimir a nota de cada aluno, e no final a média geral da turma.'''
 def f_lerNotas(m,n):
     alunos = []
@@ -334,10 +333,39 @@ def f_mediaNotas():
 
 '''QUESTÃO 21: Dada uma matriz, verifique se ela é uma matriz identidade'''
 def f_matrizIdentidade(M):
+    linhas = len(M)
+    colunas = len(M)
+    for i in range(linhas):
+        for j in range(colunas):
+            if(i == j):
+                if(M[i][j] != 1):
+                    return False
+            elif(M[i][j] != 0):
+                    return False
+    
+    return True
+
+
+'''QUESTÃO 22: Dada uma matriz M 3x3, calcule o determinante de M'''
+def f_determinanteMatriz(M):
+    diagonal_principal = int(0)
+    diagonal_secundaria = int(0)
+    determinante = 0
+    for linha in range(3):
+        diagonal_principal = 1
+        diagonal_secundaria = 1
+        for coluna in range(3):
+            diagonal_principal *= M[coluna][(linha + coluna) % 3]
+            diagonal_secundaria *= M[coluna][(linha - coluna) % 3]
+        determinante += diagonal_principal - diagonal_secundaria
+            
+    return determinante
+
 
 #testes
 def main():
-    f_mediaNotas()
+    M = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]
+    print(f_matrizIdentidade(M))
 
 if __name__ == "__main__":
-    main()
+    main() 
