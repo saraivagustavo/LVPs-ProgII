@@ -297,6 +297,7 @@ def f_somaMatriz(A,B):
         resultado.append(linha)
         
     return resultado
+
 '''QUESTÃO 20: Um professor deseja calcular o média de notas de uma turma. Faça um procedimento que leia uma matriz contendo as notas dos alunos. O procedimento começa perguntando o número "m" de alunos e número n de notas, e cria uma matriz "m x n" que armazena as "n" notas de cada um dos "m" alunos (os valores de "m", "n" e das notas serão lidos do teclado). A nota final de cada aluno é a média simples das suas "n" notas. O procedimento deve imprimir a nota de cada aluno, e no final a média geral da turma.'''
 def f_lerNotas(m,n):
     alunos = []
@@ -344,7 +345,6 @@ def f_matrizIdentidade(M):
                     return False
     
     return True
-
 
 '''QUESTÃO 22: Dada uma matriz M 3x3, calcule o determinante de M'''
 def f_determinanteMatriz(M):
