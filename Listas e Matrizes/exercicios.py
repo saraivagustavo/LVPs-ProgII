@@ -373,12 +373,42 @@ def f_matrizTriangularInferior(M):
     for linha in M:
         print(linha)
 
+'''QUESTÃO 24: Considere um jogo de xadrez onde peças são movimentadas em um tabuleiro dividido em 8 linhas e 8 colunas. Considere ainda os movimentos do cavalo: a partir de uma dada posição, conforme diagrama a seguir (onde cada possível movimento é designado por * e o cavalo é representado na célula em destaque). No esquema, o cavalo localizado na posição (4,3) pode fazer oito movimentos, sendo que um deles o levaria para a posição (6,4). Defina um procedimento que recebe uma matriz M 8 x 8 como parâmetro, na qual todos os elementos são nulos exceto a posição em que o cavalo se encontra (representado pelo número 1). Encontre esta posição e imprima a quantidade de movimentos que este cavalo pode fazer,considerando que ele não pode se movimentar para uma posição fora do tabuleiro.'''
+def f_movimentosValidos(tabuleiro, linha, coluna):
+    movimentos_validos = 0
+    movimentos_possiveis = [
+        [linha - 2, coluna - 1], [linha - 2, coluna + 1],
+        [linha - 1, coluna - 2], [linha - 1, coluna + 2],
+        [linha + 1, coluna - 1], [linha + 1, coluna + 2],
+        [linha + 2, coluna - 1], [linha + 2, coluna + 1]
+    ]
+
+    for movimento in movimentos_possiveis:
+        l, c = movimento
+        if(0 <= l < 8 and 0 <= c < 8 and tabuleiro[l][c] == 0):
+            movimentos_validos += 1
+    return movimentos_validos
+
+def f_posicaoCavalo(tabuleiro):
+    for linha in range(8):
+        for coluna in range(8):
+            if(tabuleiro[linha][coluna] == 1):
+                return linha,coluna
+
+
 #testes
 def main():
-    M = [[1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9]]
-    f_matrizTriangularInferior(M)
+    tabuleiro = [[0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 1, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0]
+                 ]
+    linha, coluna = f_posicaoCavalo(tabuleiro)
+    print(f_movimentosValidos(tabuleiro, linha, coluna))
 
 if __name__ == "__main__":
-    main() 
+    main()
