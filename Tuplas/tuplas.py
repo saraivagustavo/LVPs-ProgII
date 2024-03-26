@@ -82,13 +82,200 @@ def f_jogosEmpatados(N,l):
     resultado = 3*N - soma
     return resultado
 
+'''BOLÃO'''
+import os
 
-def main():
-    p1 = (1,2)
-    p2 = (2,3)
-    p3 = (3,4)
-    print(f_pontosAlinhados(p1,p2,p3))
-    
+def limpaTela():
+	if os.name == "nt":
+		os.system("cls")
+	else:
+		os.system("clear")
+		
+def listarJogadores(l):
+	if len(l) > 0:
+		print("Jogadores cadastrados:")
+		
+		for (nome, cpf) in l:
+			print(nome, "-", cpf)
+	else:
+		print("Nenhum jogador cadastrado até agora.")
+	
+def nomeJog(jogs, cpf):
+	for (n, c) in jogs:
+		if c == cpf:
+			return n
+	
+def existeCPF(c, l):
+	for (nome, cpf) in l:
+		if cpf == c:
+			return True
+	return False
+	
+def cadastrarJogador(l):
+	listarJogadores(l)
+	nome = input("Digite o nome do jogador: ")
+	cpf = input("Digite o cpf do jogador: ")
+	while existeCPF(cpf, l):
+		print("Erro: CPF já existente.")
+		cpf = input("Digite o cpf do jogador: ")
+	l.append( (nome, cpf) )
+	print("Jogador inserido com sucesso.")
 
-if __name__ == "__main__":
-    main()
+
+def inserirNumerosApostados():
+	l = []
+	x = int(input("Quantos números neste bilhete? "))
+	while x < 6 or x > 15:
+		x = int(input("Ooops... digite um número entre 6 e 15: "))
+	while len(l) < x:
+		n = int(input("Digite um número: "))
+		if n < 1 or n > 60 or n in l:
+			print("Número inválido.")
+		else:
+			l.append(n)
+	return l
+	
+def inserirCPFs(jogs):
+	l = []
+	listarJogadores(jogs)
+	n = int(input("Quantos jogadores neste bilhete? "))
+	for i in range(n):
+		cpf = input("Digite o CPF do jogador: ")
+		
+		while not existeCPF(cpf, jogs):
+			cpf = input("CPF inválido. Tente outro: ")
+			
+		l.append(cpf)
+	return l
+			
+def cadastrarApostas(jogs, apostas):
+	numeros = inserirNumerosApostados()
+	cpfs = inserirCPFs(jogs)
+	
+	apostas.append( (numeros, cpfs) )
+	print("Aposta cadastrada com sucesso.")
+
+def listarApostas(jogs, apostas):
+	for i in range(len(apostas)):
+		numeros, cpfs = apostas[i]
+		
+		print(f'Bilhete {i+1}:')
+		
+		print('Números: ', end='')
+		
+		for n in numeros: print(n, end=' ')
+		print()
+		
+		print('Jogadores:')
+		for cpf in cpfs:
+			print(nomeJog(jogs, cpf), '-', cpf)
+		print()
+			
+def vencedora(aposta, sorteados):
+	apostados = aposta[0]
+	
+	x = 0
+	for n in apostados:
+		if n in sorteados: x += 1
+	return x == 6
+	#########################
+	#apostados = aposta[0]
+	#
+	#for n in sorteados:
+	#	if n not in apostados: return False
+	#
+	#return True
+	
+def vencedoras(apostas, sorteados):
+	l = []
+	
+	for aposta in apostas:
+		if vencedora(aposta, sorteados):
+			l.append(aposta)
+	return l
+	
+def exibirVencedores(jogs, aposta, premioPorBilhete):
+	cpfs = aposta[1]
+	p = premioPorBilhete / len(cpfs)
+	
+	for cpf in cpfs:
+		print(f'{nomeJog(jogs, cpf)} ({cpf}): R${p}')
+	
+def sorteio(jogs, apostas):
+	sorteados = []
+	while len(sorteados) < 6:
+		x = int(input("Digite um número entre 1 e 60 que vc ainda não digitou: "))
+		
+		if x >=1 and x <= 60 and x not in sorteados:
+			sorteados.append(x)
+		else:
+			print("Burrão")
+	premioTotal = int(input("Digite o prêmio total: R$"))
+	v = vencedoras(apostas, sorteados)
+	limpaTela()
+	if len(v) == 0:
+		print("Não houve vencedores.")
+	else:
+		print("Apostas Vencedoras:")
+		premioPorBilhete = premioTotal / len(v)
+		
+		i = 1
+		for aposta in v:
+			print(f'Bilhete {i}:')
+			exibirVencedores(jogs, aposta, premioPorBilhete)
+			print()
+			i += 1
+
+def main(args):
+	print("Seja bem vindo ao Bolão")
+	menu = '''
+Escolha uma opção:
+
+	1) Cadastrar jogador
+	2) Visualizar jogadores cadastrados
+	3) Cadastrar bilhete
+	4) Visualizar bilhetes cadastrados
+	5) Sorteio
+	6) Sair
+'''
+	x = input(menu)
+	jogs = []
+	apostas = []
+	while x != "6":
+		limpaTela()
+		if x == "1":
+			cadastrarJogador(jogs)
+		elif x == "2":
+			listarJogadores(jogs)
+		elif x == "3":
+			cadastrarApostas(jogs, apostas)
+		elif x == "4":
+			listarApostas(jogs, apostas)
+		elif x == "5":
+			sorteio(jogs, apostas)
+		else:
+			print("Opção inválida. Tente novamente")
+		x = input(menu)
+	print("Tchau")
+	return 0
+
+if __name__ == '__main__':
+    import sys
+    sys.exit(main(sys.argv))
+	
+
+'''GENIUS: '''
+from random import randint
+sorteado = randint(0,9)
+correta = str(sorteado)
+
+print(f'O primeiro número sorteado foi: {sorteado}')
+x = input("Digite a sequência completa: ")
+while(x == correta):
+	sorteado = randint(0,9)
+	correta += str(sorteado)
+	limpaTela()
+	print(f'O novo número é: {sorteado}')
+	x = input("Digite a sequência completa: ")
+	
+print(f'Errou! Você acertou {len(correta)-1} números.')
