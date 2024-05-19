@@ -81,7 +81,7 @@ def f_permutacoes(l,pos = 0):
         print(l)
     else:
         for i in range(pos,len(l)):
-            f_troca(l,i,pos) #fica o primeiro elemento da lista
+            f_troca(l,i,pos) #fixa o primeiro elemento da lista
             f_permutacoes(l,pos+1)
             f_troca(l,i,pos) #destrocar a primeira chamada da função f_troca(l,i,pos)
 
