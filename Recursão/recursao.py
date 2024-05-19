@@ -72,7 +72,7 @@ def f_hanoi(n,A,B,C):
         f_hanoi(1,A,B,C)
         f_hanoi(n-1,C,B,A)
 
-'''QUESTÃO 9: Implemente uma função recursiva que imprima QUAIS as permutações de n elemehtos de uma lista l.'''
+'''QUESTÃO 9: Implemente uma função recursiva que imprima QUAIS as permutações de n elementos de uma lista l.'''
 def f_troca(l,x,y): #função de troca auxiliar na hora de chamar a função recursiva de permutações
     aux = l[x]
     l[x] = l[y]
