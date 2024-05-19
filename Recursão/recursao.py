@@ -37,12 +37,14 @@ def f_exponencial(x,n):
     
 '''QUESTÃO 5: Implemente uma função recursiva para encontrar o maior elemento de uma lista'''
 def f_maiorElemento(l):
-    if(len(l) == 0):
+    if(len(l) == 1):
         return l[0]
     else:
         maior = f_maiorElemento(l[1:])
-        if(l[0] > m): return l[0]
-        else: return m
+        if(l[0] > maior): 
+            return l[0]
+        else: 
+            return maior
 
 '''QUESTÃO 6: Implemente uma função recursiva para calcular o Máximo Divisor Comum entre dois números.'''
 def f_MDC(x,y):
@@ -87,8 +89,8 @@ def f_permutacoes(l,pos = 0):
 
 '''função main para casos de testes das funções'''
 def main():
-    l = [1,2,3]
-    f_permutacoes(l)
+    l = [1,2,3,4,45,1,78,8,56,0]
+    print(f_maiorElemento(l))
 
 if __name__ == "__main__":
     main()
