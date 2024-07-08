@@ -328,9 +328,9 @@ def f_mediaNotas():
             somaAluno += nota
         mediaAluno = somaAluno / n
         somaTurma += mediaAluno
-        print(f'Média do aluno {i+1}: {mediaAluno:.2f}')
+        print(f'Média do aluno {i+1}: {mediaAluno:.1f}')
     mediaTurma = somaTurma / m
-    print(f'Média da turma: {mediaTurma:.2f}')
+    print(f'Média da turma: {mediaTurma:.1f}')
 
 '''QUESTÃO 21: Dada uma matriz, verifique se ela é uma matriz identidade'''
 def f_matrizIdentidade(M):
